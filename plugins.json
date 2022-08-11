@@ -1,0 +1,59 @@
+[
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=cinemathek.net&sz=%size%",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/ne1work/TestPlugins",
+        "fileSize": 15542,
+        "status": 1,
+        "language": "de",
+        "authors": [
+            "fiveskill"
+        ],
+        "tvTypes": [
+            "TvSeries",
+            "Movie"
+        ],
+        "version": 2,
+        "internalName": "Cinemathek",
+        "url": "https://raw.githubusercontent.com/ne1work/TestPlugins/builds/Cinemathek.cs3",
+        "name": "Cinemathek"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=kinoger.com&sz=%size%",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/ne1work/TestPlugins",
+        "fileSize": 13358,
+        "status": 1,
+        "language": "de",
+        "authors": [
+            "ne1work"
+        ],
+        "tvTypes": [
+            "TvSeries",
+            "Movie"
+        ],
+        "version": 4,
+        "internalName": "DevKinoger",
+        "url": "https://raw.githubusercontent.com/ne1work/TestPlugins/builds/DevKinoger.cs3",
+        "name": "DevKinoger"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=kinoger.com&sz=%size%",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/ne1work/TestPlugins",
+        "fileSize": 20707,
+        "status": 1,
+        "language": "de",
+        "authors": [
+            "ne1work"
+        ],
+        "tvTypes": [
+            "TvSeries",
+            "Movie"
+        ],
+        "version": 4,
+        "internalName": "Kinoger",
+        "url": "https://raw.githubusercontent.com/ne1work/TestPlugins/builds/Kinoger.cs3",
+        "name": "Kinoger"
+    }
+]
