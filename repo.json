@@ -1,0 +1,8 @@
+{
+    "name": "ne1work repository",
+    "description": "ne1workrepo",
+    "manifestVersion": 1,
+    "pluginLists": [
+      "https://raw.githubusercontent.com/ne1work/TestPlugins/builds/plugins.json"
+    ]
+}
