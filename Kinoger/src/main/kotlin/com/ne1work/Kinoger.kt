@@ -72,26 +72,19 @@ class Kinoger : MainAPI() {
         val description = document.select("div.images-border").text()
         val year = """\((\d{4})\)""".toRegex().find(title)?.groupValues?.get(1)?.toIntOrNull()
         val tags = document.select("li.category a").map { it.text() }
-
         val recommendations = document.select("ul.ul_related li").mapNotNull {
             it.toSearchResult()
         }
 
-        val scripts = document.select("script").mapNotNull { script ->
-            val scriptContent = script.data()
-            val showPattern = Regex("""show\s*\(\s*\d+\s*,\s*(\[\[.*?\]\])\s*(,\s*.*?)*\s*\)""")
-            val match = showPattern.find(scriptContent)
-            match?.groupValues?.get(1)?.replace("'", "\"")
-        }
+        val script = document.selectFirst("script:containsData(pw)")?.data()
+            ?: document.selectFirst("script:containsData(fsst)")?.data()
+            ?: document.selectFirst("script:containsData(ollhd)")?.data()
 
-        val jsonData = scripts.flatMap { data ->
-            val parsedData = AppUtils.tryParseJson<List<List<String>>>(data)
-            parsedData ?: emptyList()
-        }
+        val data = script?.substringAfter("[")?.substringBeforeLast("]")?.replace("\'", "\"")
+        val json = AppUtils.tryParseJson<List<List<String>>>("[$data]")
 
-        val type = if (scripts.any { it.contains("0.2") }) TvType.Movie else TvType.TvSeries
-
-        val episodes = jsonData.flatMapIndexed { season: Int, iframes: List<String> ->
+        val type = if(script?.substringBeforeLast(")")?.substringAfterLast(",") == "0.2") TvType.Movie else TvType.TvSeries
+        val episodes = json?.flatMapIndexed { season: Int, iframes: List<String> ->
             iframes.mapIndexed { episode, iframe ->
                 Episode(
                     iframe.trim(),
@@ -99,8 +92,7 @@ class Kinoger : MainAPI() {
                     episode = episode + 1
                 )
             }
-        }
-
+        } ?: emptyList()
         return newTvSeriesLoadResponse(title, url, type, episodes) {
             this.posterUrl = poster
             this.year = year
