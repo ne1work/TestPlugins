@@ -79,7 +79,7 @@ class Kinoger : MainAPI() {
 
         val scripts = document.select("script").mapNotNull { script ->
             val scriptContent = script.data()
-            val showPattern = Regex("""show\s*\(\s*\d+\s*,\s*(\[\[.*?\]\])\s*,\s*0\.2\s*\)""")
+            val showPattern = Regex("""show\s*\(\s*\d+\s*,\s*(\[\[.*?\]\])\s*(,\s*.*?)*\s*\)""")
             val match = showPattern.find(scriptContent)
             match?.groupValues?.get(1)?.replace("'", "\"")
         }
