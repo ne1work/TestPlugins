@@ -76,15 +76,21 @@ class Kinoger : MainAPI() {
             it.toSearchResult()
         }
 
-        val script = document.selectFirst("script:containsData(pw)")?.data()
-            ?: document.selectFirst("script:containsData(fsst)")?.data()
-            ?: document.selectFirst("script:containsData(ollhd)")?.data()
+        val scripts = document.select("script").mapNotNull { script ->
+            val scriptContent = script.data()
+            val showPattern = Regex("""show\s*\(\s*\d+\s*,\s*(\[\[.*?\]\])\s*(,\s*.*?)*\s*\)""")
+            val match = showPattern.find(scriptContent)
+            match?.groupValues?.get(1)?.replace("'", "\"")
+        }
 
-        val data = script?.substringAfter("[")?.substringBeforeLast("]")?.replace("\'", "\"")
-        val json = AppUtils.tryParseJson<List<List<String>>>("[$data]")
+        val jsonData = scripts.flatMap { data ->
+            val parsedData = AppUtils.tryParseJson<List<List<String>>>(data)
+            parsedData ?: emptyList()
+        }
 
-        val type = if(script?.substringBeforeLast(")")?.substringAfterLast(",") == "0.2") TvType.Movie else TvType.TvSeries
-        val episodes = json?.flatMapIndexed { season: Int, iframes: List<String> ->
+        val type = if (document.select("script").any { it.data().contains("0.2") }) TvType.Movie else TvType.TvSeries
+
+        val episodes = jsonData.flatMapIndexed { season: Int, iframes: List<String> ->
             iframes.mapIndexed { episode, iframe ->
                 Episode(
                     iframe.trim(),
@@ -92,7 +98,8 @@ class Kinoger : MainAPI() {
                     episode = episode + 1
                 )
             }
-        } ?: emptyList()
+        }
+
         return newTvSeriesLoadResponse(title, url, type, episodes) {
             this.posterUrl = poster
             this.year = year
