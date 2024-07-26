@@ -78,6 +78,9 @@ class Kinoger : MainAPI() {
         }
 
         val script = document.selectFirst("script:containsData(pw)")?.data()
+            ?: document.selectFirst("script:containsData(fsst)")?.data()
+            ?: document.selectFirst("script:containsData(ollhd)")?.data()
+
         val data = script?.substringAfter("[")?.substringBeforeLast("]")?.replace("\'", "\"")
         val json = AppUtils.tryParseJson<List<List<String>>>("[$data]")
 
