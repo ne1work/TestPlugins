@@ -5,6 +5,6 @@ rootProject.name = "CloudstreamPlugins"
 
 // Plugins are included like this
 include(
-    "Cinemathek"
+    "Cinemathek",
     "Kinoger"
 )
