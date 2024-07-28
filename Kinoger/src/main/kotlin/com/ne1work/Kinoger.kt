@@ -128,8 +128,7 @@ class Kinoger : MainAPI() {
     ) {
         loadExtractor(url, referer, subtitleCallback) { link ->
             if(link.quality == Qualities.Unknown.value) {
-                callback.invoke(
-                        ExtractorLink(
+                val newLink = ExtractorLink(
                                 link.source,
                                 link.name,
                                 link.url,
@@ -141,8 +140,10 @@ class Kinoger : MainAPI() {
                                 link.type,
                                 link.headers,
                                 link.extractorData
-                        )
-                )
+                                )
+                callback(newLink)
+            } else {
+                callback(link)
             }
         }
     }
