@@ -31,7 +31,7 @@ class Cinemathek : MainAPI() {
     ): HomePageResponse {
         val document = app.get("$mainUrl/${request.data}/page/$page/").document
         val home =
-            document.select("div.items.items article, div#contenedor article").mapNotNull {
+            document.select("div.items.full article, div#archive-content article").mapNotNull {
                 it.toSearchResult()
             }
         return newHomePageResponse(
