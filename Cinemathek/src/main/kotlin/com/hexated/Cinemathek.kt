@@ -200,3 +200,8 @@ class Filelions : Filesim() {
     override val name = "Filelions"
     override var mainUrl = "https://filelions.live"
 }
+
+class CinemathekOn : Filesim() {
+    override val name = "Cinemathek"
+    override val mainUrl = "https://cinemathek.online"
+}
