@@ -14,5 +14,6 @@ class CinemathekPlugin: Plugin() {
         registerExtractorAPI(Ds2play())
         registerExtractorAPI(Do0od())
         registerExtractorAPI(Filelions())
+        registerExtractorAPI(CinemathekOn())
     }
 }
