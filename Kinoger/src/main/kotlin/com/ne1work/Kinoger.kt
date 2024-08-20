@@ -78,13 +78,13 @@ class Kinoger : MainAPI() {
 
         val scripts = document.select("script").mapNotNull { script ->
             val scriptContent = script.data()
-            val showPattern = Regex("""show\s*\(\s*\d+\s*,\s*(\[\[.*?\]\])\s*(,\s*.*?)*\s*\)""")
+            val showPattern = Regex("""show\s*\(\s*\d+\s*,\s*\[\[(.*?)\]\],\s*0\.2""")
             val match = showPattern.find(scriptContent)
             match?.groupValues?.get(1)?.replace("'", "\"")
         }
 
         val jsonData = scripts.flatMap { data ->
-            val parsedData = AppUtils.tryParseJson<List<List<String>>>(data)
+            val parsedData = AppUtils.tryParseJson<List<List<String>>>("[[$data]]")
             parsedData ?: emptyList()
         }
 
@@ -108,6 +108,7 @@ class Kinoger : MainAPI() {
             this.recommendations = recommendations
         }
     }
+
 
     override suspend fun loadLinks(
             data: String,
