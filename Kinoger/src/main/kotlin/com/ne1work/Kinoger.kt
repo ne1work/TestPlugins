@@ -26,11 +26,6 @@ import javax.crypto.Cipher
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
-class Kinogeru : Kinoger() {
-    override val name = "Kinoger"
-    override val mainUrl = "https://kinoger.ru"
-}
-
 class Kinoger : MainAPI() {
 override var name = "Kinoger"
     override var mainUrl = "https://kinoger.to"
