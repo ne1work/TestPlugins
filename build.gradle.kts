@@ -78,6 +78,7 @@ subprojects {
         implementation("org.jsoup:jsoup:1.16.2") // html parser
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.16.0")
         implementation("com.fasterxml.jackson.core:jackson-databind:2.16.0")
+        implementation("com.google.code.gson:gson:2.11.0") //Gsoon
     }
 }
 
