@@ -26,7 +26,7 @@ import javax.crypto.Cipher
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
-class Kinogeru : Chillx() {
+class Kinogeru : Kinoger() {
     override val name = "Kinoger"
     override val mainUrl = "https://kinoger.ru"
 }
